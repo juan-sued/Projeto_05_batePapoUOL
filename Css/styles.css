@@ -1,13 +1,100 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400&display=swap');
 *{
 box-sizing: border-box;
 }
+
 
 body {
   font-family: 'Roboto', sans-serif;
   width: 100%;
   height: 100%;
-  background-color: #EEF9BF
-  ;
+ 
+  background-color: #F3F3F3;
 }
+
+
+/* === HEADER DOWN === */
+h1{
+  font-size: 50px;
+}
+
+header {
+background-color: white;
+box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.05);
+height: 80px;
+padding: 10px 16px ;
+position: fixed;
+width: 100%;
+right: 0;
+top: 0;
+
+
+}
+.headerInternal{
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+}
+.headerInternal img{
+ width:65px;
+ height: 62px;
+  }
+  .headerInternal ion-icon{
+ height: 40px;
+ width: 42px;
+  }
+/* === HEADER UP === */
+ 
+
+
+
+
+/* === MAIN DOWN === */
+
+main{
+  padding-top: 80px;
+}
+  
+
+
+/* === HEADER UP === */
+
+
+
+
+/* === FOOTER DOWN === */
+footer{
+
+  background-color: white;
+  box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.05);
+  height: 80px;
+  padding: 16px ;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  right: 0;
+}
+
+
+.footerInternal{
+  margin-top: 10px;
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+}
+.footerInternal img{
+ width:65px;
+ height: 62px;
+  }
+  .footerInternal  ion-icon{
+ 
+ height: 27px;
+ width: 27px;
+  }
+  h3{
+    font-weight: 400;
+    font:  18px ;
+    font-style: italic;
+    color: #000000;
+  }
+/* === FOOTER UP === */
