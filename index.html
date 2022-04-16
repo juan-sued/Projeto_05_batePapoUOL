@@ -11,6 +11,7 @@
     <title>Bata-papo UOL</title>
   </head>
   <body>
+    <!-- === LOGIN PAGE DOWN===-->
     <div class="loginPage">
       <img src="Assets/logo.png" alt="" />
 
@@ -27,7 +28,9 @@
         <p>Nome de usuário inválido! Tente novamente, por favor.</p>
       </span>
     </div>
+    <!-- === LOGIN PAGE UP===-->
 
+    <!-- === MAIN PAGE DOWN===-->
     <div class="mainPage hidden">
       <header>
         <span class="headerInternal">
@@ -37,8 +40,26 @@
       </header>
       <main>
         <ul>
+          <li class="messageToAll hidden">
+            <span class="timeMessage"> ${response.time}&nbsp</span>
+            <span class="contentMessage hidden">
+              <strong> ${userA} &nbsp</strong>reservadamente para
+              <strong>${usuarioB}</strong>: ${response.data}
+            </span>
+          </li>
+          <li class="messageRespose hidden">
+            <span class="timeMessage"> ${response.time}&nbsp</span>
+            <span class="contentMessage">
+              <strong> ${userA} &nbsp</strong>reservadamente para
+              <strong>${usuarioB}</strong>: ${response.data}
+            </span>
+          </li>
           <li class="messageReserved hidden">
-            ${name} reservadamente para ${usuarioB}: ${response.data}
+            <span class="timeMessage"> ${response.time}&nbsp</span>
+            <span class="contentMessage">
+              <strong> ${userA} &nbsp</strong>reservadamente para
+              <strong>${usuarioB}</strong>: ${response.data}
+            </span>
           </li>
         </ul>
       </main>
@@ -55,7 +76,7 @@
         </span>
       </footer>
     </div>
-
+    <!-- === MAIN PAGE UP===-->
     <!-- ===  JAVASCRIPT === -->
     <script
       type="module"
