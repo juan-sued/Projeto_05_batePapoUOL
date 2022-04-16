@@ -11,22 +11,52 @@
     <title>Bata-papo UOL</title>
   </head>
   <body>
-    <header>
-      <span class="headerInternal">
-        <img src="/Assets/logo.png" alt="" />
-        <ion-icon name="people-outline"></ion-icon>
-      </span>
-    </header>
-    <main>
-      <h1>chat</h1>
-    </main>
-    <footer>
-      <span class="footerInternal">
-        <h3 class="writeHere">Digite aqui...</h3>
-        <ion-icon name="paper-plane-outline"></ion-icon>
-      </span>
-    </footer>
+    <div class="loginPage">
+      <img src="Assets/logo.png" alt="" />
 
+      <input
+        class="loginInput"
+        type="text"
+        placeholder="Digite seu nome"
+        style="width: 50%"
+        value=""
+      />
+      <button class="LoginButton" onclick="login()"><p>Entrar</p></button>
+
+      <span class="messageInvalidName hidden">
+        <p>Nome de usuário inválido! Tente novamente, por favor.</p>
+      </span>
+    </div>
+
+    <div class="mainPage hidden">
+      <header>
+        <span class="headerInternal">
+          <img src="/Assets/logo.png" alt="" />
+          <ion-icon name="people-outline"></ion-icon>
+        </span>
+      </header>
+      <main>
+        <ul>
+          <li class="messageReserved hidden">
+            ${name} reservadamente para ${usuarioB}: ${response.data}
+          </li>
+        </ul>
+      </main>
+      <footer>
+        <span class="footerInternal">
+          <input
+            class="writeHereInput"
+            type="text"
+            placeholder="Escreva aqui..."
+            style="width: 90%"
+            value=""
+          />
+          <ion-icon name="paper-plane-outline"></ion-icon>
+        </span>
+      </footer>
+    </div>
+
+    <!-- ===  JAVASCRIPT === -->
     <script
       type="module"
       src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
@@ -35,6 +65,7 @@
       nomodule
       src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
     ></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="JS/scripts.js"></script>
   </body>
 </html>
