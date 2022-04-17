@@ -1,5 +1,4 @@
 const loginInput = document.querySelector(".loginInput");
-
 const userLogin = { name: "" };
 const invalidUserName = document.querySelector(".messageInvalidName");
 const loginPage = document.querySelector(".loginPage");
@@ -17,7 +16,7 @@ function login() {
   userLogin.name = inputName;
   if (inputName.length <= 3 || !isNaN(inputName) || inputName.length >= 20) {
     invalidUserName.classList.remove("hidden");
-    console.log("era pra aparecer a mensagem");
+
     setTimeout(function () {
       window.location.reload(true);
     }, 3000);
@@ -28,7 +27,6 @@ function login() {
 }
 //realiza o login do usuário
 function serverContatctUserLogin(element) {
-  console.log(userLogin.name);
   const promisse = axios.post(
     "https://mock-api.driven.com.br/api/v6/uol/participants",
     element
@@ -46,15 +44,12 @@ function error(error) {
     setTimeout(function () {
       window.location.reload(true);
     }, 3000);
-  } else {
-    console.log("(dentro da function erro)erro numero" + error.response.stats);
   }
 }
 //inicia o chat e mantém ele atualizado
 function chatOn() {
   loginPage.classList.add("hidden");
   mainPage.classList.remove("hidden");
-  console.log(chatOn);
 
   serverContactGet();
   setInterval(serverContactGet, 1000);
@@ -66,7 +61,19 @@ function verificaOnline() {
 
   promisse.then(console.log("Verificado que está online"));
 }
-
+/*
+function activeButton() {
+  const sendButton = document.querySelector(".buttonSendMessage");
+  let input = document.querySelector(".writeHereInput").value;
+  console.log(input);
+  if (input !== null) {
+    sendButton.removeAttribute("disabled", "disabled");
+  }
+  if (input === null) {
+    sendButton.setAttribute("disabled", "disabled");
+  }
+}
+*
 /*
 === Forma da mensagem === Response
 
@@ -131,8 +138,8 @@ function sendMessage() {
   promisse.catch(errorSendMessage);
 }
 
-function errorSendMessage(error) {
-  alert("sem contato com o servidor" + error.response.status);
+function errorSendMessage() {
+  console.log("enviou um valor vazio");
 }
 
 function cleanAndReset() {

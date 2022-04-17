@@ -232,3 +232,8 @@ cursor:pointer;
 color:#AAAAAA;
 }
 /* === MENSAGENS UP === */
+
+
+.invisible{
+  visibility: hidden;
+}
