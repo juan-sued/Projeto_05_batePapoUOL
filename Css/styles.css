@@ -10,6 +10,7 @@ body {
   height: 100%;
   margin: 0;
   background-color: #E5E5E5;
+ 
 
 }
 
@@ -128,23 +129,26 @@ top: 0;
 
 main{
 
-  padding-top: 106px;
+  padding-top: 90px;
 
   padding-bottom: 82px;
 }
 ul{
   height: 100%;
+
   
 }
 li{
   padding: 8px;
   display: flex;
-
   align-items: center;
   min-height: 50px;
   width: 100%;
   margin: 4px 0 4px 0 ;
   font-size: 14px;
+ 
+}
+.contentMessage{
   word-break: break-word;
 }
 strong{
@@ -190,6 +194,12 @@ footer{
  color: black;
  font-weight: 400;
  font-style: italic;
+ }
+ .footerInternal button {
+border: none;
+border-radius: 3px;
+background-color: transparent;
+cursor:pointer;
  }
  
 .footerInternal  ion-icon{

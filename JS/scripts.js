@@ -1,4 +1,5 @@
 const loginInput = document.querySelector(".loginInput");
+
 const userLogin = { name: "" };
 const invalidUserName = document.querySelector(".messageInvalidName");
 const loginPage = document.querySelector(".loginPage");
@@ -10,10 +11,7 @@ const urlPaticipantsAPI =
 const urlMessagesAPI = "https://mock-api.driven.com.br/api/v6/uol/messages";
 
 let responseMessages = [];
-
 function login() {
-  console.log("clicou");
-
   let inputName = loginInput.value;
 
   userLogin.name = inputName;
@@ -25,11 +23,11 @@ function login() {
     }, 3000);
     userLogin.name = inputName;
   } else {
-    serverContactPost(userLogin);
+    serverContatctUserLogin(userLogin);
   }
 }
-
-function serverContactPost(element) {
+//realiza o login do usuário
+function serverContatctUserLogin(element) {
   console.log(userLogin.name);
   const promisse = axios.post(
     "https://mock-api.driven.com.br/api/v6/uol/participants",
@@ -39,6 +37,7 @@ function serverContactPost(element) {
   promisse.catch(error);
 }
 
+//TRATAMENTO DE ERRO
 function error(error) {
   if (error.response.status === 400) {
     invalidUserName.classList.remove("hidden");
@@ -51,19 +50,20 @@ function error(error) {
     console.log("(dentro da function erro)erro numero" + error.response.stats);
   }
 }
-
+//inicia o chat e mantém ele atualizado
 function chatOn() {
   loginPage.classList.add("hidden");
   mainPage.classList.remove("hidden");
   console.log(chatOn);
 
   serverContactGet();
-
+  setInterval(serverContactGet, 1000);
   setInterval(verificaOnline, 4000);
 }
-
+//verifica se está online
 function verificaOnline() {
   const promisse = axios.post(urlStatusAPI, userLogin);
+
   promisse.then(console.log("Verificado que está online"));
 }
 
@@ -81,21 +81,61 @@ function mensagemLogin() {
 }
 */
 
+//pega as mensagens da api
 function serverContactGet() {
   const promisse = axios.get(urlMessagesAPI);
-  console.log(promisse);
   promisse.then(loadMessages);
   promisse.catch(error);
 }
+
+//carrega as mensagens dentro da array responseMessages
 function loadMessages(response) {
   responseMessages = response.data;
-  console.log(responseMessages);
   renderMessages(responseMessages);
 }
 
-function renderMessages(response) {
+//renderiza as mensagens no chat
+function renderMessages() {
   const ul = document.querySelector("ul");
+
+  ul.innerHTML = "";
   for (let i = 0; i < responseMessages.length; i++) {
-    ul.innerHTML += `<li class='messageToAll'><span class='timeMessage'> (${responseMessages[i].time})&nbsp </span><span class='contentMessage'><strong> ${responseMessages[i].from}</strong>&nbsppara<strong>&nbsp${responseMessages[i].to}</strong>: ${responseMessages[i].text}</span></li>`;
+    if (responseMessages[i].type === "status") {
+      ul.innerHTML += `<li class='messageStatus mensagem'><span class='timeMessage'> (${responseMessages[i].time})&nbsp </span><span class='contentMessage'><strong> ${responseMessages[i].from}</strong>&nbsppara<strong>&nbsp${responseMessages[i].to}</strong>: ${responseMessages[i].text}</span></li>`;
+    }
+    if (
+      responseMessages[i].type === "private_message" &&
+      responseMessages[i].to === userLogin.name
+    ) {
+      ul.innerHTML += `<li class='messageReserved mensagem'><span class='timeMessage'> (${responseMessages[i].time})&nbsp </span><span class='contentMessage'><strong> ${responseMessages[i].from}</strong>&nbsppara<strong>&nbsp${responseMessages[i].to}</strong>: ${responseMessages[i].text}</span></li>`;
+    }
+    if (responseMessages[i].type === "message") {
+      ul.innerHTML += `<li class='messageToAll mensagem'><span class='timeMessage'> (${responseMessages[i].time})&nbsp </span><span class='contentMessage'><strong> ${responseMessages[i].from}</strong>&nbsppara<strong>&nbsp${responseMessages[i].to}</strong>: ${responseMessages[i].text}</span></li>`;
+    }
   }
+  const mensagem = document.querySelector("ul").lastChild;
+  mensagem.scrollIntoView(true);
+}
+
+function sendMessage() {
+  const messageBody = {
+    from: userLogin.name,
+    to: "Todos",
+    text: document.querySelector(".writeHereInput").value,
+    type: "message", // ou "private_message" para o bônus
+  };
+
+  const promisse = axios.post(urlMessagesAPI, messageBody);
+
+  promisse.then(cleanAndReset);
+  promisse.catch(errorSendMessage);
+}
+
+function errorSendMessage(error) {
+  alert("sem contato com o servidor" + error.response.status);
+}
+
+function cleanAndReset() {
+  document.querySelector(".writeHereInput").value = "";
+  serverContactGet();
 }
